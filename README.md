@@ -11,6 +11,8 @@
   <a href="https://serversideup.net/discord"><img alt="Discord" src="https://img.shields.io/discord/910287105714954251?color=blueviolet"></a>
 </p>
 
+# [webext-bridge](https://www.npmjs.com/package/webext-bridge), except with `sidepanel` and `offscreen` support
+
 > [!IMPORTANT]  
 > **`webext-bridge` just joined the Server Side Up family of open source projects.** [Read the announcement →](https://github.com/serversideup/webext-bridge/discussions/74)
 
