@@ -22,7 +22,7 @@
   },
   "author": "Neek Sandhu <neek.sandhu@outlook.com>",
   "scripts": {
-    "build": "tsup src/index.ts src/background.ts src/content-script.ts src/devtools.ts src/options.ts src/popup.ts src/window.ts --format esm,cjs --dts",
+    "build": "tsup src/index.ts src/background.ts src/content-script.ts src/devtools.ts src/options.ts src/popup.ts src/window.ts src/sidepanel.ts src/offscreen.ts --format esm,cjs --dts",
     "watch": "npm run build -- --watch",
     "release": "bumpp --commit --push --tag && npm run build && npm publish"
   },
@@ -43,6 +43,14 @@
     "./devtools": {
       "import": "./dist/devtools.js",
       "require": "./dist/devtools.cjs"
+    },
+    "./sidepanel": {
+      "import": "./dist/sidepanel.js",
+      "require": "./dist/sidepanel.cjs"
+    },
+    "./offscreen": {
+      "import": "./dist/offscreen.js",
+      "require": "./dist/offscreen.cjs"
     },
     "./options": {
       "import": "./dist/options.js",
@@ -73,6 +81,12 @@
       ],
       "options": [
         "dist/options.d.ts"
+      ],
+      "sidepanel": [
+        "dist/sidepanel.d.ts"
+      ],
+      "offscreen": [
+        "dist/offscreen.d.ts"
       ],
       "popup": [
         "dist/popup.d.ts"
@@ -108,5 +122,6 @@
     "tsup": "^5.11.13",
     "type-fest": "^2.11.1",
     "typescript": "^4.5.5"
-  }
+  },
+  "packageManager": "pnpm@9.7.0+sha512.dc09430156b427f5ecfc79888899e1c39d2d690f004be70e05230b72cb173d96839587545d09429b55ac3c429c801b4dc3c0e002f653830a420fa2dd4e3cf9cf"
 }

@@ -240,6 +240,28 @@ browser.runtime.onConnect.addListener((incomingPort) => {
     frameId: incomingPort.sender.frameId,
   })
 
+  if (['sidepanel', 'popup', 'options', 'devtools', 'offscreen'].includes(parseEndpoint(connArgs.endpointName).context)) {
+    browser.tabs.query({ active: true, currentWindow: true }).then(tabs => {
+      if (tabs[0]) {
+        const activeTabId = tabs[0].id
+        // Update the endpoint name with the active tab ID for sidepanel
+        if (parseEndpoint(connArgs.endpointName).tabId == null) {
+          if (parseEndpoint(connArgs.endpointName).context === 'sidepanel') {
+            connArgs.endpointName = formatEndpoint({
+              context: 'sidepanel',
+              tabId: activeTabId,
+            })
+          } else if (parseEndpoint(connArgs.endpointName).context === 'offscreen') {
+            connArgs.endpointName = formatEndpoint({
+              context: 'offscreen',
+              tabId: activeTabId,
+            })
+          }
+        }
+      }
+    })
+  }
+
   // literal tab id in case of content script, however tab id of inspected page in case of devtools context
   const { tabId: linkedTabId, frameId: linkedFrameId } = parseEndpoint(
     connArgs.endpointName,
